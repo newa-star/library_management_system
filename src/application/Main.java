@@ -13,8 +13,8 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			
-			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("application/main.fxml"));
-			Scene scene = new Scene(root,400,400);
+			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/main.fxml"));
+			Scene scene = new Scene(root,600,600);
 			
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Library System");

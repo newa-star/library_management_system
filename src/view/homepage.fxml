@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="btn_logout" layoutX="531.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickLogout" text="Log out" textFill="#da0a0a" />
+      <MenuBar layoutX="128.0" layoutY="150.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="search books">
+               <items>
+                  <Menu mnemonicParsing="false" text="search by genre">
+                     <items>
+                        <CheckMenuItem mnemonicParsing="false" text="science" />
+                        <CheckMenuItem mnemonicParsing="false" text="Dystopian" />
+                        <CheckMenuItem mnemonicParsing="false" text="Young Adult" />
+                        <CheckMenuItem mnemonicParsing="false" text="Fiction" />
+                        <CheckMenuItem mnemonicParsing="false" text="Fantasy" />
+                        <CheckMenuItem mnemonicParsing="false" text="science Fiction" />
+                        <CheckMenuItem mnemonicParsing="false" text="Romance" />
+                        <CheckMenuItem mnemonicParsing="false" text="Memoir" />
+                        <CheckMenuItem mnemonicParsing="false" text="Mystery" />
+                        <CheckMenuItem mnemonicParsing="false" text="Biography" />
+                        <CheckMenuItem mnemonicParsing="false" text="Historical Fiction" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="search by author" />
+                  <Menu mnemonicParsing="false" text="search by bookname" />
+                  <Menu mnemonicParsing="false" text="search by ISBN" />
+               </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="return books" />
+          <Menu mnemonicParsing="false" text="check and edit profiles">
+               <items>
+                  <RadioMenuItem mnemonicParsing="false" text="view profile" />
+                  <RadioMenuItem mnemonicParsing="false" text="change password" />
+               </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Label layoutX="34.0" layoutY="24.0" prefHeight="15.0" prefWidth="59.0" text="user:" />
+   </children>
+</AnchorPane>
