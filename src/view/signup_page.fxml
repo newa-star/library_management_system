@@ -5,19 +5,18 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="303.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SignupController">
    <children>
       <Label text="ID" />
-      <TextField promptText="please enter your ID" />
+      <TextField fx:id="ID_textfield" promptText="please enter your ID" />
       <Label text="name" />
-      <TextField promptText="please enter your name" />
+      <TextField fx:id="name_textfield" promptText="please enter your name" />
       <Label text="email" />
-      <TextField promptText="please enter your email address" />
+      <TextField fx:id="email_textfield" promptText="please enter your email address" />
       <Label text="password" />
-      <PasswordField promptText="please enter your password" />
+      <PasswordField fx:id="password_field" promptText="please enter your password" />
       <Label text="Confirm password" />
-      <PasswordField promptText="please confirm your password" />
+      <PasswordField fx:id="confirm_password" promptText="please confirm your password" />
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
             <Button fx:id="btn_register" layoutX="225.0" layoutY="29.0" mnemonicParsing="false" onAction="#clickRegister" text="register" textFill="#e11111" />
