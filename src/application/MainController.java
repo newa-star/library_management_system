@@ -23,7 +23,9 @@ public class MainController {
 	private TextField textID;
 	@FXML
 	private PasswordField password;
-	    
+    @FXML
+    private Button btn_forget;
+    
 	@FXML
 	public void clickLogin(ActionEvent event) {
 		try {
@@ -73,6 +75,24 @@ public class MainController {
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
+	    }
+	public void clicktoResetPass(ActionEvent event) {
+		try {
+            // Load the next page FXML file
+            Parent reset_page = FXMLLoader.load(getClass().getClassLoader().getResource("view/resetPassword.fxml"));
+
+            // Create a new scene with the next page content
+            Scene scene = new Scene(reset_page);
+
+            // Get the current stage (primaryStage) from the button's scene
+            Stage primaryStage = (Stage) btn_signup.getScene().getWindow();
+
+            // Set the new scene on the stage (Switch to the next page)
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	    }
 
 	    @FXML

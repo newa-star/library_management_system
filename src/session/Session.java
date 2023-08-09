@@ -19,7 +19,7 @@ public class Session {
 	public static ArrayList<String> getSelected_genre() {
 		return selected_genre; 
 	}
-	
+
 	public static void clearSelected_genre() {
 		selected_genre.clear();
 	}

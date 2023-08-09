@@ -52,7 +52,7 @@ public class ReturnController {
 				String update = "update br_record set returnDate = ? where brID = ?";
 				stmt = connectMysql.Connnector.executePreparedStatement(update);
 				String d = new model.CurrentDate().toString();
-				Date date = Date.valueOf(d);// String convert into a sql Date
+				Date date = Date.valueOf(d);// String convert into a sql.Date type variable
 				stmt.setDate(1, date);
 				stmt.setInt(2, br_id);
 				stmt.executeUpdate();// update return date
@@ -63,7 +63,53 @@ public class ReturnController {
 				ResultSet result = stmt.executeQuery();
 				if(result.next()) {
 					Date checkdate = result.getDate("returnDate");
-					if(checkdate != null) {
+					
+					if(checkdate != null) {// confirm the update of reuturnDate is successful
+						String setCondition = "UPDATE `library_management_system`.`book` SET `condition` = 'free' WHERE (`bookID` = ?)";
+						PreparedStatement state = connectMysql.Connnector.executePreparedStatement(setCondition);
+						state.setString(1, book_id);
+						state.executeUpdate();// set the condition of the returned book = free
+						
+						
+						String getISBN = "select ISBN from book where bookID = ?";
+						state = connectMysql.Connnector.executePreparedStatement(getISBN);
+						state.setString(1, book_id);
+						ResultSet res = state.executeQuery();
+						String ISBN = null;
+						while(res.next()) {
+							ISBN = res.getString("ISBN");// get the ISBN and use it to update the table 'bookinfo'
+							}
+						String setStock = "update bookinfo set inStock=inStock+1 where ISBN = ?";
+						state = connectMysql.Connnector.executePreparedStatement(setStock);
+						state.setString(1,ISBN);
+						state.executeUpdate();// update the stock of the corresponding book
+						
+						String calCredits = "select overdue,left(duration,2) as during,DATEDIFF(returnDate,borrowDate) as duetime from br_record where brID = ?";
+						state = connectMysql.Connnector.executePreparedStatement(calCredits);
+						state.setInt(1, br_id);
+						res = state.executeQuery();
+						int overdue = 0;
+						int due_time = 0;
+						int duration;
+						while(res.next()) {
+						overdue = Integer.valueOf(res.getString("overdue"));
+							// get the overdue value and then add/minus credits based on it
+						duration = Integer.valueOf( (res.getString("during")) );
+						due_time = res.getInt("duetime")-duration;
+							}// get how many days it has been overdue for
+						if(overdue == 1) {// overdue, minus credits
+							String minusCredits = "update user set credits=credits - ? where ID=?";
+							PreparedStatement minus = connectMysql.Connnector.executePreparedStatement(minusCredits);
+							minus.setInt(1, due_time);
+							minus.setString(2, id);
+							minus.executeUpdate();
+						}
+						else {//return on time, reward 2 credits per time
+							String addCredits  = "update user set credits=credits+2 where ID=?";
+							PreparedStatement add = connectMysql.Connnector.executePreparedStatement(addCredits);
+							add.setString(1, id);
+							add.executeUpdate();
+						}
 						Alert alert = new Alert(AlertType.CONFIRMATION);
 						alert.setContentText("You have returned the book successfully!");
 						alert.showAndWait();
@@ -73,6 +119,7 @@ public class ReturnController {
 						alert.setContentText("Something went wrong, can't find the return record");
 						alert.showAndWait();
 						}
+					//content for reserve function...
 					}
 				}
 				else {
@@ -80,6 +127,7 @@ public class ReturnController {
 					alert.setContentText("You have not borrowed this book, can't find the return record");
 					alert.showAndWait();
 				}
+				
 			}
 		}
 		catch(Exception e) {
@@ -111,4 +159,5 @@ public class ReturnController {
 	    		e.printStackTrace();
 	    	}
 	}
+	
 }
