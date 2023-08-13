@@ -12,7 +12,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			
+			connectMysql.Connnector.callProcedure();// clear any obsolete reservations and corresponding book's condition 'free'
 			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/main.fxml"));
 			Scene scene = new Scene(root,600,600);
 			

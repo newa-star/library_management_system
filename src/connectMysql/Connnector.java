@@ -49,7 +49,18 @@ public class Connnector {
     	
     	return stmt;
     }
-    
+    public static void callProcedure() {
+    	
+    	try {
+    		Class.forName(JDBC_DRIVER);
+    		Connection con = DriverManager.getConnection(DB_URL,USER,PASS);
+    		CallableStatement prepareCall=con.prepareCall("{call DeleteOldReservations()}");// check if any reservation record has been obsolete
+    		prepareCall.execute();
+    	}
+    	catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    }
     
     public static void main(String[] args) {
 		// TODO Auto-generated method stub
