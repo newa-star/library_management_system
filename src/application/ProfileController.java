@@ -22,7 +22,8 @@ public class ProfileController implements Initializable{
 
     @FXML
     private Button btn_homepage;
-    
+    @FXML
+    private Button btn_changeProfile;
 	@FXML
     private TableColumn name_col;
 
@@ -70,6 +71,28 @@ public class ProfileController implements Initializable{
     	}
     }
     
+    @FXML
+    void clicktoChangeProfile(ActionEvent event) {
+    	try {	
+       	 Parent changeProfile = FXMLLoader.load(getClass().getClassLoader().getResource("view/changeProfile.fxml"));
+
+            // Create a new scene with the next page content
+            Scene scene = new Scene(changeProfile);
+
+            // Get the current stage (primaryStage) from the button's scene
+            Stage primaryStage = (Stage) btn_homepage.getScene().getWindow();
+
+            // Set the new scene on the stage (Switch to the next page)
+            primaryStage.setScene(scene);
+            primaryStage.setResizable(false);
+            primaryStage.setTitle("Change Profile"); // Set the title of the next page
+            primaryStage.show();
+   			
+       	}
+       	catch(IOException e) {
+       		e.printStackTrace();
+       	}
+       }
     
     
     @FXML
