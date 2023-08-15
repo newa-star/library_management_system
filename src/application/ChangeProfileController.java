@@ -43,7 +43,7 @@ public class ChangeProfileController {
     		old_name = rs.getString("name");
     		old_email = rs.getString("email");
     	}
-    	if(( !new_name.equals("null") ) && ( !new_name.equals(old_name) )) {
+    	if(( !new_name.equals("") ) && ( !new_name.equals(old_name) )) {
     		String updateUser = "update user set name=? where ID=?";
     		stmt = connectMysql.Connnector.executePreparedStatement(updateUser);
     		stmt.setString(1, new_name);
@@ -58,7 +58,7 @@ public class ChangeProfileController {
     		alert.setContentText("Your input name is void or it is the same as your name in system, please check again!");
     		alert.showAndWait();
     	}
-    	if(( !new_email.equals("null") ) && ( !new_email.equals(old_email) )) {
+    	if(( !new_email.equals("") ) && ( !new_email.equals(old_email) )) {
     		String updateUser = "update user set email=? where ID=?";
     		stmt = connectMysql.Connnector.executePreparedStatement(updateUser);
     		stmt.setString(1, new_email);
@@ -70,7 +70,7 @@ public class ChangeProfileController {
     	}
     	else {
     		Alert alert = new Alert(AlertType.WARNING);
-    		alert.setContentText("Your input name is void or it is the same as your name in system, please check again!");
+    		alert.setContentText("Your input email is void or it is the same as your name in system, please check again!");
     		alert.showAndWait();
     	}
     	}

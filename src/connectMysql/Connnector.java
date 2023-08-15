@@ -31,6 +31,25 @@ public class Connnector {
     	return rs;
     }
     
+    public static void executeUpdateStatement(String sql) {
+    	
+    	try {
+    		Class.forName(JDBC_DRIVER);
+    		Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
+    		Statement stmt = conn.createStatement();
+    		stmt.executeUpdate(sql);
+    	}
+    	catch(SQLException se){
+        // handle JDBC error
+        se.printStackTrace();
+    }
+    	catch(Exception e){
+        // handle Class.forName error
+        e.printStackTrace();}
+    	
+    }
+
+    
     public static PreparedStatement executePreparedStatement(String sql) {
     	PreparedStatement stmt = null;
     	try {

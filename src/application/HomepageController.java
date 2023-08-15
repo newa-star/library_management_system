@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import session.Session;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
@@ -13,7 +14,12 @@ import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.CheckMenuItem;
 import javafx.event.*;
 
-
+import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import javafx.scene.control.Alert;
 public class HomepageController {
 
     @FXML
@@ -75,7 +81,8 @@ public class HomepageController {
 
     @FXML
     private Button btn_logout;
-
+    @FXML
+    private Button btn_cancel;
 
     @FXML
     public void clickLogout(ActionEvent event) {
@@ -94,6 +101,68 @@ public class HomepageController {
 	}
     
 
+    @FXML
+    public void clicktoCancel(ActionEvent event) {
+    	try 
+    	{
+    		String user_id = session.Session.getUserID();
+    		String check = "select returnDate from br_record where UID=? and returnDate is null";// user has not returned the book
+    		PreparedStatement stmt = connectMysql.Connnector.executePreparedStatement(check);
+    		stmt.setString(1,user_id);
+    		ResultSet rs = stmt.executeQuery();
+    		if(rs.next()) {
+    			Alert alert = new Alert(AlertType.WARNING);
+    			alert.setContentText("You have not yet returned all the books you borrowed!");
+    			alert.showAndWait();
+    		}
+    		else {
+    			String deleteReservation = "delete from reservation where UID=?";
+    			stmt = connectMysql.Connnector.executePreparedStatement(deleteReservation);
+    			stmt.setString(1, user_id);
+    			stmt.executeUpdate();// delete reservation record of the user
+    			
+    			String deleteBr_record = "delete from br_record where UID=?";
+    			stmt = connectMysql.Connnector.executePreparedStatement(deleteBr_record);
+    			stmt.setString(1, user_id);
+    			stmt.executeUpdate();// delete borrow and return records of the user
+    			
+    			String dropKey = "ALTER TABLE `br_record` DROP FOREIGN KEY `fk_user`"; 
+    			String dropConstrain = "ALTER TABLE `br_record` DROP INDEX `fk_user_idx`";
+    			connectMysql.Connnector.executeUpdateStatement(dropKey);
+    			connectMysql.Connnector.executeUpdateStatement(dropConstrain);// delete all the constraints first
+    			
+    			String deleteUser = "delete from user where ID=?";
+    			stmt = connectMysql.Connnector.executePreparedStatement(deleteUser);
+    			stmt.setString(1, user_id);
+    			stmt.executeUpdate();// delete user profile
+    			
+    			String addIndex = "ALTER TABLE `br_record` ADD INDEX `fk_user_idx` (`UID` ASC) VISIBLE;";
+    			String addConstrain = "ALTER TABLE `br_record` ADD CONSTRAINT `fk_user`  FOREIGN KEY (`UID`) REFERENCES `library_management_system`.`user` (`ID`)";
+    			connectMysql.Connnector.executeUpdateStatement(addIndex);
+    			connectMysql.Connnector.executeUpdateStatement(addConstrain);//add the constraints of original table
+    			
+    			Alert alert = new Alert(AlertType.INFORMATION);
+    			alert.setContentText("You have cancelled your account successfully!");
+    			alert.showAndWait();
+    			
+    			Session.clear();//clear user id stored in session
+    			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/main.fxml"));
+    			Scene scene = new Scene(root,600,600);
+    			Stage primaryStage = (Stage) btn_logout.getScene().getWindow();
+    			primaryStage.setScene(scene);
+    			primaryStage.setTitle("Library System");
+    			primaryStage.setResizable(false);
+    			primaryStage.show();//return to main page
+    			
+    		}
+    	}
+    	catch(SQLException e) {
+    		e.printStackTrace();
+    	}
+    	catch(IOException e) {
+    		e.printStackTrace();
+    	}
+    }
 
     @FXML
     public void clicktoViewProfile(ActionEvent event) {

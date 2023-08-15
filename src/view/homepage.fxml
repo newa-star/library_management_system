@@ -48,5 +48,6 @@
             <Tooltip text="cilck here to search books in selected genre" />
          </tooltip>
       </Button>
+      <Button fx:id="btn_cancel" layoutX="132.0" layoutY="86.0" mnemonicParsing="false" onAction="#clicktoCancel" text="Cancel account" textFill="#f82929" />
    </children>
 </AnchorPane>
