@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HomepageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HomepageController">
    <children>
-      <Button fx:id="btn_logout" layoutX="531.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickLogout" text="Log out" textFill="#da0a0a" />
-      <MenuButton layoutX="130.0" layoutY="157.0" mnemonicParsing="false" text="search books">
+      <ImageView fitHeight="600.0" fitWidth="600.0" pickOnBounds="true">
+         <image>
+            <Image url="@../bg_image/library_bg.jpg" />
+         </image>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+      </ImageView>
+      <Button fx:id="btn_logout" layoutX="525.0" layoutY="21.0" mnemonicParsing="false" onAction="#clickLogout" text="Log out" textFill="#e11111" />
+      <MenuButton layoutX="182.0" layoutY="246.0" mnemonicParsing="false" text="search books" textFill="#10d3e3">
         <items>
             <MenuItem fx:id="author" mnemonicParsing="false" onAction="#clickAuthor" text="search by author" />
             <MenuItem fx:id="bookname" mnemonicParsing="false" onAction="#clickBookname" text="search by bookname" />
@@ -31,23 +48,23 @@
             </Menu>
         </items>
       </MenuButton>
-      <MenuButton layoutX="130.0" layoutY="260.0" mnemonicParsing="false" text="check and edit profiles">
+      <MenuButton layoutX="182.0" layoutY="497.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="173.0" text="check and edit profiles" textFill="#10d3e3">
         <items>
             <RadioMenuItem fx:id="profile" mnemonicParsing="false" onAction="#clicktoViewProfile" text="view profile" />
             <RadioMenuItem fx:id="password" mnemonicParsing="false" onAction="#clicktoChangePassword" text="change password" />
         </items>
       </MenuButton>
-      <MenuButton layoutX="130.0" layoutY="213.0" mnemonicParsing="false" text="return books">
+      <MenuButton layoutX="182.0" layoutY="325.0" mnemonicParsing="false" text="return books" textFill="#10d3e3">
         <items>
           <MenuItem fx:id="Return" mnemonicParsing="false" onAction="#clicktoReturn" text="return" />
         </items>
       </MenuButton>
-      <Circle fill="#f5f8fc" layoutX="372.0" layoutY="170.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
-      <Button fx:id="btn_search_genre" layoutX="345.0" layoutY="158.0" mnemonicParsing="false" onAction="#clicktoSearch" opacity="0.27" text="search">
+      <Circle fill="#f5f8fc" layoutX="377.0" layoutY="258.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
+      <Button fx:id="btn_search_genre" layoutX="351.0" layoutY="246.0" mnemonicParsing="false" onAction="#clicktoSearch" opacity="0.27" text="search" textFill="#7e12e3">
          <tooltip>
             <Tooltip text="cilck here to search books in selected genre" />
          </tooltip>
       </Button>
-      <Button fx:id="btn_cancel" layoutX="132.0" layoutY="86.0" mnemonicParsing="false" onAction="#clicktoCancel" text="Cancel account" textFill="#f82929" />
+      <Button fx:id="btn_cancel" layoutX="182.0" layoutY="123.0" mnemonicParsing="false" onAction="#clicktoCancel" text="Cancel account" textFill="#e11111" />
    </children>
 </AnchorPane>

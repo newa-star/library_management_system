@@ -7,15 +7,15 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="303.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SignupController">
    <children>
-      <Label text="ID" />
+      <Label text="ID" textFill="#3614cd" />
       <TextField fx:id="ID_textfield" promptText="please enter your ID" />
-      <Label text="name" />
+      <Label text="name" textFill="#3614cd" />
       <TextField fx:id="name_textfield" promptText="please enter your name" />
-      <Label text="email" />
+      <Label text="email" textFill="#3614cd" />
       <TextField fx:id="email_textfield" promptText="please enter your email address" />
-      <Label text="password" />
+      <Label text="password" textFill="#3614cd" />
       <PasswordField fx:id="password_field" promptText="please enter your password" />
-      <Label text="Confirm password" />
+      <Label text="Confirm password" textFill="#3614cd" />
       <PasswordField fx:id="confirm_password" promptText="please confirm your password" />
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>

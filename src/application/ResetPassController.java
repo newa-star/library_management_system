@@ -34,44 +34,53 @@ public class ResetPassController {
 			String id = id_textfield.getText();
 			String new_pass = new_password.getText();
 			String confirm_pass = confirm_new_password.getText();
-			
-			if(!new_pass.equals(confirm_pass)) {
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.setContentText("Your new passwords are different, please confirm it again!");
-			alert.showAndWait();
-				}
-			else {
-					
-				String sql = "update user set password=? where ID=?";
-				PreparedStatement stmt = connectMysql.Connnector.executePreparedStatement(sql);
-				stmt.setString(1, new_pass);
-				stmt.setString(2, id);
-				stmt.executeUpdate();
-				String check = "select ID,password from user where ID=? and password=?";
-				stmt = connectMysql.Connnector.executePreparedStatement(check);
-				stmt.setString(1, id);
-				stmt.setString(2, new_pass);
-				ResultSet rs = stmt.executeQuery();
-				while(rs.next()) {
-					Alert alert = new Alert(AlertType.INFORMATION);
-					alert.setContentText("Your password has been reset successfully!");
+			String sql = "select ID from user where ID=?";
+			PreparedStatement state = connectMysql.Connnector.executePreparedStatement(sql);
+			state.setString(1, id);
+			ResultSet set = state.executeQuery();
+			if(set.next()) {// this id exists in database which means it is a registered user
+				if(!new_pass.equals(confirm_pass)) {
+					Alert alert = new Alert(AlertType.WARNING);
+					alert.setContentText("Your new passwords are different, please confirm it again!");
 					alert.showAndWait();
+					}
+				else {
+					
+					String update = "update user set password=? where ID=?";
+					PreparedStatement stmt = connectMysql.Connnector.executePreparedStatement(update);
+					stmt.setString(1, new_pass);
+					stmt.setString(2, id);
+					stmt.executeUpdate();
+					String check = "select ID,password from user where ID=? and password=?";
+					stmt = connectMysql.Connnector.executePreparedStatement(check);
+					stmt.setString(1, id);
+					stmt.setString(2, new_pass);
+					ResultSet rs = stmt.executeQuery();
+					while(rs.next()) {
+						Alert alert = new Alert(AlertType.INFORMATION);
+						alert.setContentText("Your password has been reset successfully!");
+						alert.showAndWait();
+					}
+					Parent main = FXMLLoader.load(getClass().getClassLoader().getResource("view/main.fxml"));
+
+					// Create a new scene with the next page content
+					Scene scene = new Scene(main,600,600);
+
+					// Get the current stage (primaryStage) from the button's scene
+					Stage primaryStage = (Stage) btn_reset.getScene().getWindow();
+
+					// Set the new scene on the stage (Switch to the next page)
+					primaryStage.setScene(scene);
+					primaryStage.setResizable(false);
+					primaryStage.setTitle("Library System"); // Set the title of the next page
+					primaryStage.show();
 				}
-				Parent main = FXMLLoader.load(getClass().getClassLoader().getResource("view/main.fxml"));
-
-		         // Create a new scene with the next page content
-		         Scene scene = new Scene(main,600,600);
-
-		         // Get the current stage (primaryStage) from the button's scene
-		         Stage primaryStage = (Stage) btn_reset.getScene().getWindow();
-
-		         // Set the new scene on the stage (Switch to the next page)
-		         primaryStage.setScene(scene);
-		         primaryStage.setResizable(false);
-		         primaryStage.setTitle("Library System"); // Set the title of the next page
-		         primaryStage.show();
 			}
-				
+			else {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setContentText("You have not yet registered!");
+				alert.showAndWait();
+			}
 		}
 		catch(Exception e) {
 			e.printStackTrace();

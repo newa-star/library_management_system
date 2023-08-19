@@ -1,17 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ChangeProfileController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ChangeProfileController">
    <children>
-      <TextField fx:id="name_textfield" layoutX="192.0" layoutY="101.0" prefHeight="23.0" prefWidth="192.0" promptText="please enter your name" />
-      <TextField fx:id="email_textfield" layoutX="192.0" layoutY="177.0" prefHeight="23.0" prefWidth="192.0" promptText="please enter your email address" />
-      <Label alignment="CENTER" layoutX="68.0" layoutY="105.0" prefHeight="15.0" prefWidth="68.0" text="name" />
-      <Label alignment="CENTER" layoutX="68.0" layoutY="181.0" prefHeight="15.0" prefWidth="68.0" text="email" />
-      <Button fx:id="btn_confrim" layoutX="254.0" layoutY="288.0" mnemonicParsing="false" onAction="#clicktoConfirm" text="Confirm" />
-      <Button fx:id="btn_homepage" layoutX="491.0" layoutY="34.0" mnemonicParsing="false" onAction="#clicktoHomepage" text="homepage" />
+      <ImageView fitHeight="600.0" fitWidth="600.0" pickOnBounds="true">
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+         <image>
+            <Image url="@../bg_image/library_bg.jpg" />
+         </image>
+      </ImageView>
+      <TextField fx:id="name_textfield" layoutX="170.0" layoutY="53.0" prefHeight="23.0" prefWidth="192.0" promptText="please enter your name" />
+      <TextField fx:id="email_textfield" layoutX="170.0" layoutY="98.0" prefHeight="23.0" prefWidth="192.0" promptText="please enter your email address" />
+      <Label alignment="TOP_LEFT" layoutX="61.0" layoutY="57.0" prefHeight="15.0" prefWidth="68.0" text="name" textFill="#3614cd" />
+      <Label alignment="TOP_LEFT" layoutX="61.0" layoutY="102.0" prefHeight="15.0" prefWidth="68.0" text="email" textFill="#3614cd" />
+      <Button fx:id="btn_confrim" layoutX="213.0" layoutY="485.0" mnemonicParsing="false" onAction="#clicktoConfirm" prefHeight="62.0" prefWidth="107.0" text="Confirm" textFill="#10d3e3" />
+      <Button fx:id="btn_homepage" layoutX="500.0" layoutY="14.0" mnemonicParsing="false" onAction="#clicktoHomepage" text="homepage" textFill="#24e14d" />
    </children>
 </AnchorPane>
