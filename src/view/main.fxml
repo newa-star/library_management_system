@@ -21,7 +21,7 @@
             </Lighting>
          </effect>
          <image>
-            <Image url="@../../../../design/bg_image/library_bg.jpg" />
+            <Image url="@../bg_image/library_bg.jpg" />
          </image>
       </ImageView>
       <Button fx:id="btn_login" contentDisplay="CENTER" layoutX="104.0" layoutY="477.0" mnemonicParsing="false" onAction="#clickLogin" prefHeight="40.0" prefWidth="79.0" text="Log in" textAlignment="CENTER" textFill="#10d3e3" />

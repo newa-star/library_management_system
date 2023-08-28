@@ -60,7 +60,7 @@
         </items>
       </MenuButton>
       <Circle fill="#f5f8fc" layoutX="377.0" layoutY="258.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
-      <Button fx:id="btn_search_genre" layoutX="344.0" layoutY="246.0" mnemonicParsing="false" onAction="#clicktoSearch" opacity="0.27" text="search" textFill="#7e12e3">
+      <Button fx:id="btn_search_genre" layoutX="339.0" layoutY="246.0" mnemonicParsing="false" onAction="#clicktoSearch" opacity="0.27" prefHeight="30.0" prefWidth="76.0" text="search" textFill="#7e12e3">
          <tooltip>
             <Tooltip text="cilck here to search books in selected genre" />
          </tooltip>
