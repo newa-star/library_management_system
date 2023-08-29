@@ -188,17 +188,18 @@ public class BookinfoController implements Initializable{
 				stmt = connectMysql.Connnector.executePreparedStatement(validation);
 				stmt.setInt(1, br_id);
 				ResultSet result = stmt.executeQuery();
-				result.next();
-				Date borrow_date = result.getDate("borrowDate");
-				int duration = Integer.valueOf(result.getString("duration").substring(0, 2));
-				LocalDate localDate_borrow = borrow_date.toLocalDate();
-		        LocalDate localDate_current = Date.valueOf(new model.CurrentDate().toString()).toLocalDate();
-		        Duration length = Duration.between(localDate_borrow.atStartOfDay(), localDate_current.atStartOfDay());
-		        int realDuration = (int)length.toDays();
-		        if(realDuration > duration) {
-		        	hasOverdue = true;
-		        	break;
-		        }
+				if(result.next()) {
+					Date borrow_date = result.getDate("borrowDate");
+					int duration = Integer.valueOf(result.getString("duration").substring(0, 2));
+					LocalDate localDate_borrow = borrow_date.toLocalDate();
+					LocalDate localDate_current = Date.valueOf(new model.CurrentDate().toString()).toLocalDate();
+					Duration length = Duration.between(localDate_borrow.atStartOfDay(), localDate_current.atStartOfDay());
+					int realDuration = (int)length.toDays();
+					if(realDuration > duration) {
+						hasOverdue = true;
+						break;
+					}
+				}
 			}
 			if( ( credits<=0 || ( condition.equals("borrowed") ) ) || hasOverdue ) {
 				Alert alert = new Alert(AlertType.WARNING);
@@ -320,17 +321,18 @@ try {
 		stmt = connectMysql.Connnector.executePreparedStatement(validation);
 		stmt.setInt(1, br_id);
 		ResultSet result = stmt.executeQuery();
-		result.next();
-		Date borrow_date = result.getDate("borrowDate");
-		int duration = Integer.valueOf(result.getString("duration").substring(0, 2));
-		LocalDate localDate_borrow = borrow_date.toLocalDate();
-        LocalDate localDate_current = Date.valueOf(new model.CurrentDate().toString()).toLocalDate();
-        Duration length = Duration.between(localDate_borrow.atStartOfDay(), localDate_current.atStartOfDay());
-        int realDuration = (int)length.toDays();
-        if(realDuration > duration) {
-        	hasOverdue = true;
-        	break;
-        }
+		if(result.next()) {
+			Date borrow_date = result.getDate("borrowDate");
+			int duration = Integer.valueOf(result.getString("duration").substring(0, 2));
+			LocalDate localDate_borrow = borrow_date.toLocalDate();
+			LocalDate localDate_current = Date.valueOf(new model.CurrentDate().toString()).toLocalDate();
+			Duration length = Duration.between(localDate_borrow.atStartOfDay(), localDate_current.atStartOfDay());
+			int realDuration = (int)length.toDays();
+			if(realDuration > duration) {
+				hasOverdue = true;
+				break;
+			}
+		}
 	}
 	if( ( credits<=0 || ( condition.equals("borrowed") ) ) || hasOverdue ) {
 		Alert alert = new Alert(AlertType.WARNING);
@@ -452,17 +454,18 @@ try {
 		stmt = connectMysql.Connnector.executePreparedStatement(validation);
 		stmt.setInt(1, br_id);
 		ResultSet result = stmt.executeQuery();
-		result.next();
-		Date borrow_date = result.getDate("borrowDate");
-		int duration = Integer.valueOf(result.getString("duration").substring(0, 2));
-		LocalDate localDate_borrow = borrow_date.toLocalDate();
-        LocalDate localDate_current = Date.valueOf(new model.CurrentDate().toString()).toLocalDate();
-        Duration length = Duration.between(localDate_borrow.atStartOfDay(), localDate_current.atStartOfDay());
-        int realDuration = (int)length.toDays();
-        if(realDuration > duration) {
-        	hasOverdue = true;
-        	break;
-        }
+		if(result.next()) {
+			Date borrow_date = result.getDate("borrowDate");
+			int duration = Integer.valueOf(result.getString("duration").substring(0, 2));
+			LocalDate localDate_borrow = borrow_date.toLocalDate();
+			LocalDate localDate_current = Date.valueOf(new model.CurrentDate().toString()).toLocalDate();
+			Duration length = Duration.between(localDate_borrow.atStartOfDay(), localDate_current.atStartOfDay());
+			int realDuration = (int)length.toDays();
+        	if(realDuration > duration) {
+        		hasOverdue = true;
+        		break;
+        	}
+		}
 	}
 	if( ( credits<=0 || ( condition.equals("borrowed") ) ) || hasOverdue ) {
 		Alert alert = new Alert(AlertType.WARNING);
@@ -576,17 +579,20 @@ try {
 			state = connectMysql.Connnector.executePreparedStatement(validation);
 			state.setInt(1, br_id);
 			ResultSet result = state.executeQuery();
-			result.next();
-			Date borrow_date = result.getDate("borrowDate");
-			int duration = Integer.valueOf(result.getString("duration").substring(0, 2));
-			LocalDate localDate_borrow = borrow_date.toLocalDate();
-	        LocalDate localDate_current = Date.valueOf(new model.CurrentDate().toString()).toLocalDate();
-	        Duration length = Duration.between(localDate_borrow.atStartOfDay(), localDate_current.atStartOfDay());
-	        int realDuration = (int)length.toDays();
-	        if(realDuration > duration) {
-	        	hasOverdue = true;
-	        	break;
-	        }
+			if(result.next()) {
+			
+				Date borrow_date = result.getDate("borrowDate");
+				int duration = Integer.valueOf(result.getString("duration").substring(0, 2));
+				LocalDate localDate_borrow = borrow_date.toLocalDate();
+				LocalDate localDate_current = Date.valueOf(new model.CurrentDate().toString()).toLocalDate();
+				Duration length = Duration.between(localDate_borrow.atStartOfDay(), localDate_current.atStartOfDay());
+				int realDuration = (int)length.toDays();
+				if(realDuration > duration) {
+	        	
+					hasOverdue = true;
+					break;
+				}
+			}
 		}
 		if(credits<=0 || hasOverdue) {
 			Alert alert = new Alert(AlertType.WARNING);
