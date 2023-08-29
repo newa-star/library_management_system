@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
@@ -31,5 +32,10 @@
       <TextField fx:id="textID" layoutX="104.0" layoutY="64.0" prefHeight="23.0" prefWidth="182.0" promptText="please enter your 6 digits ID" />
       <PasswordField fx:id="password" layoutX="104.0" layoutY="111.0" prefHeight="23.0" prefWidth="182.0" promptText="please enter your password" />
       <Button fx:id="btn_forget" layoutX="300.0" layoutY="111.0" mnemonicParsing="false" onAction="#clicktoResetPass" text="forget password" />
+      <Label layoutX="134.0" layoutY="14.0" prefHeight="32.0" prefWidth="332.0" text="Library Management System" textFill="#252524">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
