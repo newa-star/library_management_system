@@ -43,14 +43,16 @@ public class ReturnController {
 			}
 			else 
 			{// userid has been checked
-				String sql = "select brID from br_record where UID=? and bookID=?";
+				String sql = "select brID,returnDate from br_record where UID=? and bookID=?";
 				PreparedStatement stmt = connectMysql.Connnector.executePreparedStatement(sql);
 				stmt.setString(1, id);
 				stmt.setString(2, book_id);
 				ResultSet rs = stmt.executeQuery();
 					if(rs.next()) 
 					{// borrowed record has been checked
-					
+						rs.last();// move to last borrowing record of this user and book 
+						if(rs.getDate("returnDate")==null) // check whether the book is returned
+						{// the book is not returned
 						br_id = rs.getInt("brID");
 						String updateReturnDate = "update br_record set `returnDate` = ? where brID = ?";
 						stmt = connectMysql.Connnector.executePreparedStatement(updateReturnDate);
@@ -68,7 +70,7 @@ public class ReturnController {
 						{
 							Date checkdate = rs.getDate("returnDate");
 					
-							if(checkdate != null) 
+							if(checkdate!=null )
 							{// confirmed the update of reuturnDate is successful
 								String setCondition = "UPDATE `library_management_system`.`book` SET `condition` = 'free' WHERE (`bookID` = ?)";
 								PreparedStatement state = connectMysql.Connnector.executePreparedStatement(setCondition);
@@ -149,10 +151,17 @@ public class ReturnController {
 								alert.showAndWait();
 							}
 						}
+						
 						else 
 						{
 							Alert alert = new Alert(AlertType.ERROR);
 							alert.setContentText("Something went wrong, can't find the return record");
+							alert.showAndWait();
+						}
+						}// the book has  not been returned
+						else {// the book has been returned
+							Alert alert = new Alert(AlertType.ERROR);
+							alert.setContentText("You have returned this book!");
 							alert.showAndWait();
 						}
 					}// borrow record checked
