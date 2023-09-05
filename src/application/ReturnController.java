@@ -138,6 +138,8 @@ public class ReturnController {
 									upd.setString(1, "reserved");
 									upd.setString(2, book_id);
 									upd.executeUpdate();// update condition
+									//send email
+									new mailSender.SendReminderMail().sendMail(book_id);
 								}
 								else 
 								{

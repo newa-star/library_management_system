@@ -125,12 +125,12 @@ public class BookinfoController implements Initializable{
 		try {
 		String text = search_textfield.getText();
 		String sql = "SELECT bookinfo.ISBN, bookname, author, publisher, publishDate, genre, amount, inStock, bookID " +
-                "FROM bookinfo, book " +"WHERE bookinfo.ISBN = book.ISBN AND (bookinfo.ISBN like ? or bookname like ? or author like ?)" +
-                "GROUP BY bookinfo.ISBN";
+                "FROM bookinfo, book " +"WHERE bookinfo.ISBN = book.ISBN AND (bookinfo.ISBN = ? or bookname REGEXP ? or author REGEXP ?)" +
+                "GROUP BY bookID";
 		PreparedStatement stmt = connectMysql.Connnector.executePreparedStatement(sql);
-		stmt.setString(1, "%"+text+"%");
-		stmt.setString(2, "%"+text+"%");
-		stmt.setString(3, "%"+text+"%");
+		stmt.setString(1, text);
+		stmt.setString(2, text);
+		stmt.setString(3, text);
 		ResultSet rs = stmt.executeQuery();
 		ObservableList<model.SelectedGenre> data = FXCollections.observableArrayList();
 		while(rs.next()) {
